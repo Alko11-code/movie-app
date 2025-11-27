@@ -1,0 +1,41 @@
+extends ../layout
+
+block content
+  a.back-link(href="/movies") Back to Movies
+  
+  .movie-details-container
+    h1.movie-title-main= movie.name
+    
+    .movie-info-section
+      h3 Description
+      p.info-value= movie.description
+    
+    .movie-meta-grid
+      .movie-info-section
+        h3 Year
+        p.info-value= movie.year
+      
+      .movie-info-section
+        h3 Genres
+        p.info-value= movie.genres.join(', ')
+      
+      if movie.rating
+        .movie-info-section
+          h3 Rating
+          p.info-value= movie.rating + '/10 ⭐'
+    
+    .movie-footer
+      if movie.createdBy && movie.createdBy.username
+        p Added by: #{movie.createdBy.username}
+      if movie.createdAt
+        p Created: #{new Date(movie.createdAt).toLocaleDateString()}
+    
+    //- Show Edit/Delete buttons only if user owns the movie
+    if user && movie.createdBy && user.userId && movie.createdBy._id.toString() === user.userId.toString()
+      .movie-actions
+        a.btn.btn-warning(href=`/movies/${movie._id}/edit`) ✏️ Edit Movie
+        button#deleteBtn.btn.btn-danger(
+          type="button"
+          data-movie-id=movie._id
+          data-movie-name=movie.name
+        ) 🗑️ Delete Movie

@@ -1,0 +1,86 @@
+extends ../layout
+
+block content
+  .auth-page
+    a.back-link(href="/movies")  Back to Movies
+    
+    .auth-container
+      h1.auth-title Register
+      p.auth-subtitle Create your account to continue
+      
+      form.auth-form(action="/register" method="POST")
+        .form-group
+          label.form-label(for="username") Username
+          input.form-input(
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Username"
+            value=oldInput ? oldInput.username : ''
+            class=errors && errors.username ? 'error' : ''
+            minlength="3"
+            maxlength="30"
+            required
+          )
+          if errors && errors.username
+            span.error-message= errors.username.msg
+          else
+            .form-helper 3-30 characters
+        
+        .form-group
+          label.form-label(for="email") Email
+          .input-with-icon
+            input.form-input(
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Email"
+              value=oldInput ? oldInput.email : ''
+              class=errors && errors.email ? 'error' : ''
+              required
+            )
+            span.input-icon 
+          if errors && errors.email
+            span.error-message= errors.email.msg
+        
+        .form-group
+          label.form-label(for="password") Password
+          .input-with-icon
+            input.form-input(
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Password"
+              class=errors && errors.password ? 'error' : ''
+              minlength="6"
+              required
+            )
+            span.password-toggle
+          if errors && errors.password
+            span.error-message= errors.password.msg
+          else
+            .form-helper Minimum 6 characters
+        
+        .form-group
+          label.form-label(for="confirmPassword") Confirm Password
+          input.form-input(
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            class=errors && errors.confirmPassword ? 'error' : ''
+            minlength="6"
+            required
+          )
+          if errors && errors.confirmPassword
+            span.error-message= errors.confirmPassword.msg
+        
+        //- General backend error
+        if errors && errors.general
+          .alert.alert-error= errors.general.msg
+        
+        button.btn-auth(type="submit") Register 
+      
+      .auth-footer
+        | Already have an account? 
+        a(href="/login") Login here

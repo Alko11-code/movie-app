@@ -39,20 +39,25 @@ app.use(session({
   saveUninitialized: false,
   store: MongoStore.create({
     mongoUrl: process.env.MONGODB_URI,
-    touchAfter: 24 * 3600 // Lazy session update (24 hours)
+    touchAfter: 24 * 3600
   }),
   cookie: {
-    maxAge: 1000 * 60 * 60 * 24 // 24 hours
+    maxAge: 1000 * 60 * 60 * 24
   }
 }));
 
 // Middleware - Flash messages and user data to all views
 app.use((req, res, next) => {
-  res.locals.currentUser = req.session.userId;
-  res.locals.success = req.session.success;
-  res.locals.error = req.session.error;
+  res.locals.user = req.session.userId ? {
+    userId: req.session.userId,
+    username: req.session.username
+  } : null;
+  
+  res.locals.successMessage = req.session.success;
+  res.locals.errorMessage = req.session.error;
   delete req.session.success;
   delete req.session.error;
+  
   next();
 });
 
@@ -61,22 +66,15 @@ app.get('/', (req, res) => {
   res.redirect('/movies');
 });
 
-// Temporary test route
-app.get('/movies', (req, res) => {
-  res.send(`
-    <h1>🎬 Movie App is Working!</h1>
-    <p>Express is configured correctly!</p>
-    <p>Session ID: ${req.sessionID}</p>
-  `);
-});
-
-// Import route files (we'll create these next)
-// const authRoutes = require('./routes/auth');
-// const movieRoutes = require('./routes/movies');
+// Import route files
+const indexRoutes = require('./routes/index');
+const authRoutes = require('./routes/auth');
+const movieRoutes = require('./routes/movies');
 
 // Use routes
-// app.use('/', authRoutes);
-// app.use('/movies', movieRoutes);
+app.use('/', indexRoutes); 
+app.use('/', authRoutes);
+app.use('/movies', movieRoutes);
 
 // 404 Error handler
 app.use((req, res) => {

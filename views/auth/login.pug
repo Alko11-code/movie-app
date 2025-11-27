@@ -1,0 +1,47 @@
+extends ../layout
+
+block content
+  .auth-page
+    a.back-link(href="/movies") Back to Movies
+    
+    .auth-container
+      h1.auth-title Log In
+      p.auth-subtitle Enter your credentials to continue
+      
+      form.auth-form(action="/login" method="POST")
+        .form-group
+          label.form-label(for="email") Email
+          .input-with-icon
+            input.form-input(
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Email"
+              value=oldInput ? oldInput.email : ''
+              class=errors && errors.email ? 'error' : ''
+              required
+            )
+            span.input-icon
+          if errors && errors.email
+            span.error-message= errors.email.msg
+        
+        .form-group
+          label.form-label(for="password") Password
+          .input-with-icon
+            input.form-input(
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Password"
+              class=errors && errors.password ? 'error' : ''
+              required
+            )
+            span.password-toggle
+          if errors && errors.password
+            span.error-message= errors.password.msg
+        
+        button.btn-auth(type="submit") Login
+      
+      .auth-footer
+        | Don't have an account? 
+        a(href="/register") Create one

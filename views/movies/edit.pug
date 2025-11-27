@@ -1,0 +1,166 @@
+extends ../layout
+
+block content
+  .page-header
+    h1.page-title ✏️ Edit Movie
+  
+  a.back-link(href=`/movies/${movie._id}`) Back to Movie Details
+  
+  .form-container
+    form(action=`/movies/${movie._id}/edit` method="POST")
+      .form-group
+        label.form-label(for="name") Movie Name:
+        input.form-input(
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Enter movie name"
+          value=oldInput ? oldInput.name : movie.name
+          class=errors && errors.name ? 'error' : ''
+          minlength="1"
+          maxlength="200"
+          required
+        )
+        if errors && errors.name
+          span.error-message ✕ #{errors.name.msg}
+      
+      .form-group
+        label.form-label(for="description") Description:
+        textarea.form-textarea(
+          id="description"
+          name="description"
+          placeholder="Describe the movie..."
+          class=errors && errors.description ? 'error' : ''
+          minlength="10"
+          required
+        )= oldInput ? oldInput.description : movie.description
+        if errors && errors.description
+          span.error-message ✕ #{errors.description.msg}
+        else
+          .form-helper Minimum 10 characters
+      
+      .form-group
+        label.form-label(for="year") Year:
+        input.form-input(
+          type="number"
+          id="year"
+          name="year"
+          placeholder="Release year"
+          value=oldInput ? oldInput.year : movie.year
+          class=errors && errors.year ? 'error' : ''
+          min="1888"
+          max=new Date().getFullYear()
+          required
+        )
+        if errors && errors.year
+          span.error-message ✕ #{errors.year.msg}
+      
+      .form-group
+        label.form-label Genres (Select at least one):
+        - const selectedGenres = oldInput && oldInput.genres ? oldInput.genres : movie.genres
+        .checkbox-group
+          .checkbox-item
+            input(
+              type="checkbox"
+              id="action"
+              name="genres"
+              value="Action"
+              checked=selectedGenres.includes('Action')
+            )
+            label(for="action") Action
+          
+          .checkbox-item
+            input(
+              type="checkbox"
+              id="comedy"
+              name="genres"
+              value="Comedy"
+              checked=selectedGenres.includes('Comedy')
+            )
+            label(for="comedy") Comedy
+          
+          .checkbox-item
+            input(
+              type="checkbox"
+              id="drama"
+              name="genres"
+              value="Drama"
+              checked=selectedGenres.includes('Drama')
+            )
+            label(for="drama") Drama
+          
+          .checkbox-item
+            input(
+              type="checkbox"
+              id="horror"
+              name="genres"
+              value="Horror"
+              checked=selectedGenres.includes('Horror')
+            )
+            label(for="horror") Horror
+          
+          .checkbox-item
+            input(
+              type="checkbox"
+              id="scifi"
+              name="genres"
+              value="Sci-Fi"
+              checked=selectedGenres.includes('Sci-Fi')
+            )
+            label(for="scifi") Sci-Fi
+          
+          .checkbox-item
+            input(
+              type="checkbox"
+              id="romance"
+              name="genres"
+              value="Romance"
+              checked=selectedGenres.includes('Romance')
+            )
+            label(for="romance") Romance
+          
+          .checkbox-item
+            input(
+              type="checkbox"
+              id="thriller"
+              name="genres"
+              value="Thriller"
+              checked=selectedGenres.includes('Thriller')
+            )
+            label(for="thriller") Thriller
+          
+          .checkbox-item
+            input(
+              type="checkbox"
+              id="documentary"
+              name="genres"
+              value="Documentary"
+              checked=selectedGenres.includes('Documentary')
+            )
+            label(for="documentary") Documentary
+        
+        if errors && errors.genres
+          span.error-message ✕ #{errors.genres.msg}
+      
+      .form-group
+        label.form-label(for="rating") Rating (0-10):
+          span.form-helper  (optional)
+        input.form-input(
+          type="number"
+          id="rating"
+          name="rating"
+          placeholder="Optional rating"
+          value=oldInput ? oldInput.rating : movie.rating
+          class=errors && errors.rating ? 'error' : ''
+          min="0"
+          max="10"
+          step="0.1"
+        )
+        if errors && errors.rating
+          span.error-message ✕ #{errors.rating.msg}
+      
+      //- General error
+      if errors && errors.general
+        .alert.alert-error= errors.general.msg
+      
+      button.btn.btn-primary.btn-block(type="submit") Update Movie

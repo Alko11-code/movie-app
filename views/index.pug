@@ -1,0 +1,44 @@
+extends layout
+
+block content
+  .page-header
+    h1.page-title 🎬 All Movies
+  
+  //- Navigation buttons (Login/Register or Add Movie/Logout)
+  .nav-buttons
+    if user
+      a.btn.btn-success(href="/movies/add") ➕ Add Movie
+      a.btn.btn-danger(href="/logout") Logout (#{user.username})
+    else
+      a.btn.btn-primary(href="/login") Login
+      a.btn.btn-success(href="/register") Register
+  
+  //- Movies grid
+  if movies && movies.length > 0
+    .movies-grid
+      each movie in movies
+        .movie-card
+          h3.movie-card-title= movie.name
+          
+          .movie-card-meta
+            span.badge.badge-year= movie.year
+            if movie.rating
+              span.badge.badge-rating= movie.rating + '/10'
+          
+          p.movie-card-genres
+            strong Genres: 
+            = movie.genres.join(', ')
+          
+          if movie.createdBy && movie.createdBy.username
+            p.movie-card-author Added by: #{movie.createdBy.username}
+          
+          a.btn.btn-primary(href=`/movies/${movie._id}`) View Details →
+  else
+    .empty-state
+      .empty-state-icon 🎬
+      h3 No Movies Yet
+      p Start by adding your first movie!
+      if user
+        a.btn.btn-success(href="/movies/add") Add Your First Movie
+      else
+        a.btn.btn-primary(href="/register") Register to Add Movies

@@ -721,6 +721,7 @@ h2 {
   transition: all 0.2s ease;
 }
 
+
 .auth-form .form-input:focus {
   outline: none;
   border-color: #3b82f6;
@@ -734,6 +735,39 @@ h2 {
 
 .auth-form .form-input::placeholder {
   color: #94a3b8;
+}
+
+/* Forgot password help section */
+.forgot-password-help {
+  text-align: center;
+  margin-top: 20px;
+  padding: 16px;
+  background: #f0f9ff;
+  border-radius: 8px;
+  border: 1px solid #bfdbfe;
+}
+
+.help-text {
+  font-size: 0.95rem;
+  color: #1e40af;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.help-subtext {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.help-subtext a {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.help-subtext a:hover {
+  text-decoration: underline;
 }
 
 /* Auth button */
@@ -808,27 +842,8 @@ h2 {
 }
 
 /* Password toggle icon - FIXED POSITION */
-.password-toggle {
-  position: absolute;
-  right: 16px;  
-  top: 50%;
-  transform: translateY(-50%);
-  color: #94a3b8;
-  cursor: pointer;
-  font-size: 1.05rem;
-  user-select: none;
-  z-index: 10;
-  pointer-events: auto;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+/* Password field container */
 
-.password-toggle:hover {
-  color: #64748b;
-}
 
 .password-toggle:hover {
   color: #64748b;
@@ -855,11 +870,24 @@ h2 {
   display: none;
 }
 
+
+
 /* ========== RESPONSIVE DESIGN ========== */
 @media (max-width: 768px) {
   .container {
     padding: 20px;
     border-radius: 12px;
+  }
+
+  .password-field .form-input {
+    padding-right: 48px !important;
+  }
+  
+  .password-field .password-toggle {
+    right: 14px;
+    width: 22px;
+    height: 22px;
+    font-size: 1rem;
   }
 
   .page-header {
@@ -915,6 +943,8 @@ h2 {
   }
 }
 
+
+
 @media (max-width: 480px) {
   body {
     padding: 10px;
@@ -923,6 +953,16 @@ h2 {
   .page-title,
   h1 {
     font-size: 1.6rem;
+  }
+
+  .password-field .form-input {
+    padding-right: 45px !important;
+  }
+  
+  .password-field .password-toggle {
+    right: 12px;
+    width: 20px;
+    height: 20px;
   }
 
   .container {
@@ -960,6 +1000,7 @@ h2 {
   .auth-title {
     font-size: 1.5rem;
   }
+  
 }
 
 /* ========== UTILITY CLASSES ========== */
@@ -997,3 +1038,4 @@ html {
   outline: 2px solid #3b82f6;
   outline-offset: 2px;
 }
+

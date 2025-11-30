@@ -21,22 +21,20 @@ block content
               class=errors && errors.email ? 'error' : ''
               required
             )
-            span.input-icon
+            span.input-icon 
           if errors && errors.email
             span.error-message= errors.email.msg
         
         .form-group
           label.form-label(for="password") Password
-          .input-with-icon
-            input.form-input(
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Password"
-              class=errors && errors.password ? 'error' : ''
-              required
-            )
-            span.password-toggle
+          input.form-input(
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            class=errors && errors.password ? 'error' : ''
+            required
+          )
           if errors && errors.password
             span.error-message= errors.password.msg
         

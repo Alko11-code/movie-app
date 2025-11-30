@@ -2,7 +2,7 @@ extends ../layout
 
 block content
   .auth-page
-    a.back-link(href="/movies")  Back to Movies
+    a.back-link(href="/movies") Back to Movies
     
     .auth-container
       h1.auth-title Register
@@ -45,17 +45,15 @@ block content
         
         .form-group
           label.form-label(for="password") Password
-          .input-with-icon
-            input.form-input(
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Password"
-              class=errors && errors.password ? 'error' : ''
-              minlength="6"
-              required
-            )
-            span.password-toggle
+          input.form-input(
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            class=errors && errors.password ? 'error' : ''
+            minlength="6"
+            required
+          )
           if errors && errors.password
             span.error-message= errors.password.msg
           else
@@ -75,11 +73,10 @@ block content
           if errors && errors.confirmPassword
             span.error-message= errors.confirmPassword.msg
         
-        //- General backend error
         if errors && errors.general
           .alert.alert-error= errors.general.msg
         
-        button.btn-auth(type="submit") Register 
+        button.btn-auth(type="submit") Register
       
       .auth-footer
         | Already have an account? 

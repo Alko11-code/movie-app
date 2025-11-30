@@ -60,7 +60,8 @@ router.post('/register', validateRegistration, async (req, res) => {
     // Create session with personalized welcome message
     req.session.userId = user._id;
     req.session.username = user.username;
-    req.session.success = `Registration successful! Welcome, ${user.username}!`;
+    req.session.success = `Registration successful! Welcome, ${user.username}! 
+                       ⚠️ Please save your login credentials safely.`;
     
     res.redirect('/movies');
   } catch (error) {

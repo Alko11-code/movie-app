@@ -1,4 +1,4 @@
-# 🎬 Movie Management Application
+# 🎬 MovieVault
 
 A full-stack web application for managing movies with user authentication, CRUD operations, and cloud deployment. Built as a final project for CPAN 212 - Modern Web Technologies.
 

@@ -138,6 +138,16 @@ block content
               checked=selectedGenres.includes('Documentary')
             )
             label(for="documentary") Documentary
+
+            .checkbox-item
+            input(
+              type="checkbox"
+              id="sciencefiction"
+              name="genres"
+              value="sciencefiction"
+              checked=selectedGenres.includes('sciencefiction')
+            )
+            label(for="sciencefiction") sciencefiction
         
         if errors && errors.genres
           span.error-message ✕ #{errors.genres.msg}

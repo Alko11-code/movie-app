@@ -1,7 +1,7 @@
 extends ../layout
 
 block content
-  a.back-link(href="/movies") Back to Movies
+  a.back-link(href="/movies") ← Back to Movies
   
   .movie-details-container
     h1.movie-title-main= movie.name
@@ -34,8 +34,5 @@ block content
     if user && movie.createdBy && user.userId && movie.createdBy._id.toString() === user.userId.toString()
       .movie-actions
         a.btn.btn-warning(href=`/movies/${movie._id}/edit`) ✏️ Edit Movie
-        button#deleteBtn.btn.btn-danger(
-          type="button"
-          data-movie-id=movie._id
-          data-movie-name=movie.name
-        ) 🗑️ Delete Movie
+        form.delete-form(action=`/movies/${movie._id}/delete` method="POST" style="display: inline;")
+          button.btn.btn-danger(type="submit") 🗑️ Delete Movie

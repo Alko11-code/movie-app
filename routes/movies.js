@@ -141,19 +141,13 @@ router.post('/:id/edit', isAuthenticated, isMovieOwner, validateMovie, async (re
 // POST /movies/:id/delete - Delete movie
 router.post('/:id/delete', isAuthenticated, isMovieOwner, async (req, res) => {
   try {
-    const movieName = req.movie.name;
     await Movie.findByIdAndDelete(req.params.id);
-    
-    res.json({ 
-      success: true, 
-      message: `"${movieName}" has been deleted successfully!` 
-    });
+    req.session.success = 'Movie deleted successfully!';
+    res.redirect('/movies');
   } catch (error) {
     console.error('Error deleting movie:', error);
-    res.status(500).json({ 
-      success: false, 
-      message: 'Error deleting movie' 
-    });
+    req.session.error = 'Error deleting movie';
+    res.redirect('/movies');
   }
 });
 

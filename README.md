@@ -288,8 +288,7 @@ This project is created for educational purposes as part of CPAN 212 - Modern We
 
 ## 👨‍💻 Authors
 
-- **Arpit Patel** - *Lead Developer* - [GitHub Profile](https://github.com/Alko11-code)
-- **Muskaan** - *Documentation & Testing*[GitHub Profile](https://github.com/Muskaankaursectiond)
+- **Arpit Patel** - *Developer   * - [GitHub Profile](https://github.com/Alko11-code)
 
 ---
 
